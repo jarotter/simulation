@@ -1,0 +1,4 @@
+*.Rdata
+*.Rhistory
+*.py[cod]
+__pycahce__/
