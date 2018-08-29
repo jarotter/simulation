@@ -1,0 +1,40 @@
+---
+title: "Tarea 1"
+author: Jorge Rotter
+date: 30 de agosto de 2018
+output: html_notebook
+---
+
+0. Aquí sólo cargo librerías.
+```{r echo=FALSE}
+library(tidyverse)
+```
+
+1. Sea $X$ el número de 'unos' obtenido en doce lanzamientos de un dado honesto. Entonces, $X$
+tiene una distribución binomial. Calcule una tabla con los valores de lal función de 
+distribución para $x \in \{0, \cdots , 12\}$ por dos métodos: usando la función `cumsum` y
+la función `pbinom`. Calcule también $\mathbb{P} \{X>7\}$.
+```{r}
+# Sólo por claridad, uso los nombres convencionales de los parámetros
+n <- 12
+p <- 1/6
+
+
+# Calcular tabla
+probabilities <- data_frame(x=0:12,
+           using_cumsum = cumsum(choose(n,x)*p^x*(1-p)^(n-x)),
+           using_pbinom = pbinom(x,n,p))
+
+# Calcular P{X>7}
+1 - pbinom(7,n,p)
+
+```
+
+2. En un artículo de Wikipedia se reportan las estaturas de lso presidentes de los Estados 
+Unidos y la de sus oponentes en elecciones. Se ha notado que típicamente, el candidato más
+alto gana la elección. Haga una gráfica de dispersión de puntos con la estatura del ganador
+contra la del perdedor.
+```{r}
+
+````
+
