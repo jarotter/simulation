@@ -34,7 +34,10 @@ probabilities <- data_frame(x=0:12,
 Unidos y la de sus oponentes en elecciones. Se ha notado que típicamente, el candidato más
 alto gana la elección. Haga una gráfica de dispersión de puntos con la estatura del ganador
 contra la del perdedor.
-```{r}
+```{r, echo=F}
+read_csv('./data/us_presidents_heights.csv',col_types = cols()) %>%
+  ggplot(aes(x=opponent_height, y=winner_height)) +
+  geom_point()
 
 ````
 
