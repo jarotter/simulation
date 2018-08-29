@@ -41,3 +41,79 @@ read_csv('./data/us_presidents_heights.csv',col_types = cols()) %>%
 
 ````
 
+3. La función `rpois` genera observaciones aleatorias de una distribución Poisson. Úsela para
+simular un número grande ($n=1000$ y $n=10000$) de muestras Poisson con parámetro 
+$\lambda = 0.61$. Encuentre la función de masa de probabilidad, media y varianza para la 
+muestra, y compare con los valores teóricos.
+
+```{r}
+set.seed(3141)
+#x <- rpois(1000, 0.61)
+x <- rpois(10000, 0.61)
+# media
+mean(x)
+
+# varianza
+var(x)
+
+# masa de probabilidad
+data_frame(x) %>%
+  group_by(x) %>%
+  summarise(p_muestra = n()/1000) %>%
+  mutate(p_teorica = 0.61^x*exp(-0.61)/factorial(x))
+````
+La media fue $\bar{x}=0.623$, un poco arriba del 0.61 teórico.
+La varianza (con la fórmula de R, que es el insesgado, no el máximo verosimil) es 0.605,
+un poco abajo del teórico pero en menor medida. Usando, el máximo verosimil, la estimación
+sería aún menor.
+
+Con $n=10,000$, la media muestral es 0.622 y la varianza 0.606, no mejoran demasiado.
+
+4. Escriba una función en R llamada `sd_n` que regres el valor estimado de $\hat{sigma}$ de 
+una muestra de tamaño n utilizando la fórmula máximo verosimil.
+```{r}
+sd_n <- function(x){
+  sqrt(sum((x-mean(x))^2)/length(x))
+}
+```
+
+5. Escriba una función `norma` que calcule la norma euclideana de un vector numérico. Evalúe
+la norma de los vectores $(0,0,0,1)$, $(2,5,2,4)$ y $(1,2,3,4,5,6,7,8,9,10)$.
+```{r}
+norma <- function(x){
+  sqrt(sum(x^2))
+}
+
+norma(c(0,0,0,1))
+norma(c(2,5,2,4))
+norma(1:10)
+```
+
+6. Use la función `curve` para graficar la función $f(x)=e^{-x^2}/(1+x^2)$ en el intervalo
+$0 \leq x \leq 10$. Use la función `ingtegrate` para integrarla en $[0, \infty)$.
+
+```{r}
+func <- function(x) exp(-x^2)/(1+x^2)
+curve(expr = func,from = 0,to = 10)
+integrate(func, 0, Inf)
+```
+
+7. Construya una muestra de 10 observaciones de una normal bivariada. Use la función `apply` 
+y la función `norma` del ejercicio 5 para calcular la norma de cada observación.
+```{r}
+x <- matrix(rnorm(20), 10, 2)
+apply(x, 1, norma)
+```
+
+8. Haga un boxplot de los siguientes datos para compaar los factores de resistencia en
+cada presión.
+```{r}
+data_frame(presion = rep(c(35,49.5,70,99,140),4),
+           factor_resistencia = c(112,108,120,110,100,
+                                  119,99,106,101,102,
+                                  117,112,102,99,96,
+                                  113,118,109,104,101)) %>%
+  ggplot(aes(x=as.factor(presion), y=factor_resistencia)) +
+  geom_boxplot()
+```
+
