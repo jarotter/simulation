@@ -49,7 +49,7 @@ mm1 <- function(lambda_a, lambda_s, n){
   max_tiempo_cola <- max(tiempo_fila)
 
   return(c(tiempo_simulacion, espera_promedio, 
-           longitud_promedio, uso_promedio, Ye¿Po
+           longitud_promedio, uso_promedio,
            tiempo_total_promedio, max_longitud_cola,
            max_tiempo_cola))
 }
