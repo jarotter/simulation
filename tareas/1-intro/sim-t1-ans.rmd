@@ -1,13 +1,18 @@
 ---
 title: "Tarea 1"
-author: Jorge Rotter
-date: 30 de agosto de 2018
-output: html_notebook
+author: "Jorge Rotter"
+date: "30 de agosto de 2018"
+output:
+  word_document: default
+  html_notebook: default
+  pdf_document:
+    latex_engine: xelatex
+  html_document:
+    df_print: paged
 ---
 
-0. Aquí sólo cargo librerías.
-```{r echo=FALSE}
-library(tidyverse)
+```{r, echo=F, messages=F}
+suppressMessages(library(tidyverse))
 ```
 
 1. Sea $X$ el número de 'unos' obtenido en doce lanzamientos de un dado honesto. Entonces, $X$
@@ -34,12 +39,12 @@ probabilities <- data_frame(x=0:12,
 Unidos y la de sus oponentes en elecciones. Se ha notado que típicamente, el candidato más
 alto gana la elección. Haga una gráfica de dispersión de puntos con la estatura del ganador
 contra la del perdedor.
-```{r, echo=F}
+```{r}
 read_csv('./data/us_presidents_heights.csv',col_types = cols()) %>%
   ggplot(aes(x=opponent_height, y=winner_height)) +
   geom_point()
 
-````
+```
 
 3. La función `rpois` genera observaciones aleatorias de una distribución Poisson. Úsela para
 simular un número grande ($n=1000$ y $n=10000$) de muestras Poisson con parámetro 
@@ -47,8 +52,6 @@ $\lambda = 0.61$. Encuentre la función de masa de probabilidad, media y varianz
 muestra, y compare con los valores teóricos.
 
 ```{r}
-set.seed(3141)
-#x <- rpois(1000, 0.61)
 x <- rpois(10000, 0.61)
 # media
 mean(x)
@@ -61,7 +64,7 @@ data_frame(x) %>%
   group_by(x) %>%
   summarise(p_muestra = n()/1000) %>%
   mutate(p_teorica = 0.61^x*exp(-0.61)/factorial(x))
-````
+```
 La media fue $\bar{x}=0.623$, un poco arriba del 0.61 teórico.
 La varianza (con la fórmula de R, que es el insesgado, no el máximo verosimil) es 0.605,
 un poco abajo del teórico pero en menor medida. Usando, el máximo verosimil, la estimación
@@ -117,3 +120,26 @@ data_frame(presion = rep(c(35,49.5,70,99,140),4),
   geom_boxplot()
 ```
 
+9. Este ejercicio da continuidad a la cola M/M/1 que programamos antes.
+a. Modifique su código para incluir las siguientes medidas:
+- El tiempo total promedio de los $n$ clientes en el sistema
+- La longitud máxima de la cola
+- La máxima espera en la cola
+```{r, echo=F, messages=F}
+source('./utils/mm1.r') 
+```
+
+b. Ejecute el modelo 100 veces para $\lambda_A = 5, \lambda_S = 4, n=1000$ y haga un histograma
+para cada una de las medidas de desempeño. Calculee estadísticas descriptivas.
+```{r}
+resultados <- replicate(100, mm1(5,4,1000), simplify=FALSE) %>%
+  bind_rows()
+
+resultados %>%
+  gather() %>%
+  ggplot(aes(value)) +
+  geom_histogram(bins=15)+
+  facet_wrap(~key, scales='free_x')
+  
+
+```
