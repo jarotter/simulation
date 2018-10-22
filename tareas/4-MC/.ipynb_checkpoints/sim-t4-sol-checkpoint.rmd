@@ -1,0 +1,49 @@
+# Tarea 4
+
+## Pregunta 1
+Considere un modelo de líneas de espera con un servidor y tiempos de arriba y de interarribo independientes $\mathcal{U}(0,1)$ .
+
+Sea $A_i$ el tiempo de interarribo entre los clientes  $i$ e $i-1$, y $S_i$  el tiempo de servicio del cliente $i$.  Sea también $W_i$ su tiempo de espera.  Suponga que el primer cliente llega al sistema en el tiempo 0. Entonces, 
+$$
+W_i = \max \{0, W_{i-1}+S_{i-1}-A_i\}
+$$
+para $i \in \{2, 3, \cdots, 100\}$ y $W_1=0$.  Simule 5000 realizaciones del tiempo total de espera en la fila, junto con 5000 realizaciones antitéticas.
+
+
+
+```{r}
+
+```
+
+## Pregunta 2
+Cinco elementos, numerados del 1 al 5 se acomodan inicialmente en un orden aleatorio. En cada estado del proceso, uno de los elementos es seleccionado y puesto en el frente de la lista. Por ejemplo, si el orden presente es $(2,3,4,1,5)$ y el elemento 1 se elige, entonces el nuevo orden es $(1,2,3,4,5)$. Supongan que cada selección es, independientemente, elemento $i$ con probabilidad $pi$, donde
+
+\[
+\mathbf~{p}'=(\frac{1}{15},\frac{2}{15},\frac{3}{15},\frac{4}{15},\frac{5}{15},)
+\]
+
+Sea $L_j$ la posición del $j$-ésimo elemento seleccionado y $L=\sum_{j=1}^{100}L_j$
+
+a. Explique cómo utilizar simulación para estimar $\mathbb{E}[L]$.
+
+Recordemos que hay $5!=120$ permutaciones de los números $\{1, 2, 3, 4, 5\}$. Podemos enumerarlas (por ejemplo en el orden que `combinat::permn` las regresa en `R`) y elegir una es equivalente a extraer una muestra tamaño uno de $P \sim \mathcal{U}\{1,5\}$ (discreta). (Nótese que esta es la parte tardada de todo el proceso, por lo que es mejor generarlas sólo cuando se necesiten e irlas guardando en memoria).
+
+Una vez elegida la distribución inicial, elegimos una muestra tamaño $n=100$ de con la masa de probabilidad $\mathbf{p}$ de arriba. Cada observación es un cambio. Vamos haciendo los cambios en el orden de la muestra, y entre cambio y cambio tenemos la $L_j$ correspondiente. Con este proceso obtenemos las 100 $L_j$, que luego usamos para calcular $L$. Repitiendo el proceso un número grande de veces, aproximamos $\mathbb{E}[L]$ con $\bar{L}$.
+
+b. Calcule $\mathbb{E}[N_i]$, donde $N_i$ es el número de veces que se elige al elemento $i$ en 100.
+
+Notemos que, como las elecciones son independientes, $N_i \sim \textrm{Bin}(100,p_i)$, por lo que $\mathbb{E}[N_i]=100p_i$.
+
+c. Sea $Y = \sum_{i=1}^5iN_i$. ¿Cómo se relaciona $Y$ con $L$?
+
+\[
+\begin{align}
+\mathbb{E}[Y] &= \mathbb{E}\left[\sum_{i=1}^5Ni\right] = \sum_{i=1}^5i\mathbb{E}[Ni] = \sum_{i=1}^5100ip_i = 100\sum_{i=1}^5ip_i=100\mathbb{E}[L_1] \\ & =\sum_{j=1}^{100}\mathbb{E}[L_1]= \sum_{j=1}^{100}\mathbb{E}[L_j]  = \mathbb{E}\left[\sum_{j=1}^{100}Lj\right] = \mathbb{E}[L]
+\end{align}
+\]
+
+d. Desarrolle un estudio para estimar $L$ usando $Y$ como variable de control.
+
+```{r}
+simular_
+```

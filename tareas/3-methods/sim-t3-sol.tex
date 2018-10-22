@@ -1,0 +1,1446 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Tarea 3},
+            pdfauthor={Sergio Arnaud, Jorge Rotter},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{Tarea 3}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{Sergio Arnaud, Jorge Rotter}
+    \preauthor{\centering\large\emph}
+  \postauthor{\par}
+      \predate{\centering\large\emph}
+  \postdate{\par}
+    \date{10/11/2018}
+
+\usepackage{amsmath}
+\usepackage{mdsymbol}
+
+\begin{document}
+\maketitle
+
+\hypertarget{pregunta-1}{%
+\subsection{Pregunta 1}\label{pregunta-1}}
+
+Un estadístico está interesado en el número N de peces en un estanque.
+El captura 250 peces, los marca y los regresa al estanque. Unos cuantos
+días después regresa y atrapa peces hasta que obtiene 50 peces marcados,
+en ese punto también tiene 124 peces no marcados (la muestra total es de
+174 peces).
+
+\begin{itemize}
+\tightlist
+\item
+  ¿Cuál es la estimación de N?
+\end{itemize}
+
+\(\frac{124}{50} = 2.48\) de forma que la estimación de N está dada por
+\(2.48\cdot250=620\)
+
+\begin{itemize}
+\tightlist
+\item
+  Hagan un programa (en excel o en R), que permita simular el proceso de
+  obtener la primera y segunda muestra considerando como parámetros el
+  tamaño N de la población de interés, el tamaño de la primera y segunda
+  muestra y como datos a estimar son: de qué tamaño debe ser n1 y n2
+  para obtener una buena aproximación y ver cómo se afecta por el tamaño
+  N.
+\end{itemize}
+
+El siguiente código, para una N dada (en este caso N=620) regresa los
+tamaños de muestra (n1 y n2) que dan la mejor estimación de N donde n1
+es la muestra que se debe de obtener y marcar en una primera instancia y
+n2 es la muestra que se debe obtener en una segunda instancia para
+comparar los marcados vs los no marcados y estimar la población total.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{N <-}\StringTok{ }\DecValTok{620}
+\NormalTok{j <-}\DecValTok{1}
+\NormalTok{means <-}\KeywordTok{matrix}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DataTypeTok{nrow=}\KeywordTok{round}\NormalTok{(N}\OperatorTok{/}\DecValTok{4}\NormalTok{), }\DataTypeTok{ncol=}\KeywordTok{round}\NormalTok{(N}\OperatorTok{/}\DecValTok{4}\NormalTok{))}
+\ControlFlowTok{for}\NormalTok{ (N1 }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{round}\NormalTok{(N}\OperatorTok{/}\DecValTok{4}\NormalTok{))\{}
+  \ControlFlowTok{for}\NormalTok{ (N2 }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{round}\NormalTok{(N}\OperatorTok{/}\DecValTok{4}\NormalTok{))\{}
+\NormalTok{    aprox =}\StringTok{ }\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{15}\NormalTok{)}
+    \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\DecValTok{15}\NormalTok{)\{}
+\NormalTok{       l =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,N1),}\KeywordTok{rep}\NormalTok{(}\DecValTok{1}\NormalTok{,N}\OperatorTok{-}\NormalTok{N1))}
+\NormalTok{       s <-}\StringTok{ }\KeywordTok{sample}\NormalTok{(l,N2)}
+\NormalTok{       aprox[i] =}\StringTok{ }\NormalTok{(}\KeywordTok{sum}\NormalTok{(s)}\OperatorTok{/}\NormalTok{(}\KeywordTok{length}\NormalTok{(s)}\OperatorTok{-}\KeywordTok{sum}\NormalTok{(s)))}\OperatorTok{*}\NormalTok{N1}
+\NormalTok{    \}}
+\NormalTok{    means[[N1,N2]] =}\StringTok{ }\KeywordTok{mean}\NormalTok{(aprox)}
+\NormalTok{    j =}\StringTok{ }\NormalTok{j}\OperatorTok{+}\DecValTok{1}
+\NormalTok{  \}}
+\NormalTok{\}}
+\NormalTok{ans <-}\StringTok{ }\KeywordTok{which}\NormalTok{((}\KeywordTok{abs}\NormalTok{(means }\OperatorTok{-}\StringTok{ }\NormalTok{N)) }\OperatorTok{==}\StringTok{ }\KeywordTok{min}\NormalTok{(}\KeywordTok{abs}\NormalTok{(means }\OperatorTok{-}\StringTok{ }\NormalTok{N)),}\DataTypeTok{arr.ind=}\NormalTok{T)}
+\CommentTok{# n1}
+\NormalTok{ans[}\DecValTok{1}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 36
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# n2}
+\NormalTok{ans[}\DecValTok{2}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 94
+\end{verbatim}
+
+\hypertarget{pregunta-2}{%
+\subsection{Pregunta 2}\label{pregunta-2}}
+
+Este problema es una versión simplificada de dos problemas comunes que
+enfretan las compañías de seguros: calcular la probabilidad de quebrar y
+estimar cuánto dinero podrán hacer. Supongan que una compañía tiene
+activos (todo en dólares) por \(\$10^6\) y \(n=1,000\) clientes que
+pagan individualmente una prima anual de \$5,500 al principio de cada
+año. Basándose en experiencia previa, se estima que la probabilidad de
+que un cliente haga reclamo es \(p=0.1\) por año, independientemente de
+reclamos previos de otros clientes. El tamaño \(X\) de los reclamos
+varía, y tiene la siguiente densidad con \(\alpha = 5\) y
+\(\beta = 125,000\) \[
+f(x) = I(x\geq0)\frac{\alpha \beta^\alpha}{(x+\beta)^{\alpha+1}}
+\]
+
+Consideremos la fortuna de la compañía en un horizonte de cinco años, y
+sea \(Z(t)\) la cantidad de activo al terminar el año \(t\), de manera
+que \(Z(0)=1,000,000\) y
+\(Z(t)=I(Z(t-1)>0)\max\{Z(t-1)+\textrm{primas}-\textrm{reclamos},0\}\)
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  Calcule la función de distribución \(F_X\), \(\mathbb{E}[X]\)y
+  \(\textrm{Var}(X)\). Obtenga por simulación una muestra de \(X\),
+  calcule su distribución empírica y compare con la verdadera.
+\end{enumerate}
+
+\[
+\begin{align}
+F_X(x) &= \int_0^x \frac{\alpha \beta^\alpha}{(t+\beta)^{\alpha+1}}dt \\
+&= \int_\beta^{x+\beta}\alpha \beta^\alpha u^{-(\alpha+1)} du\\
+&= -\beta^\alpha \left[ \frac{1}{u^\alpha} \right]^{x+\beta}_\beta \\ 
+&= 1 - \left(1+\frac{\beta}{x+\beta} \right)^\alpha
+\end{align}
+\]
+
+Para la esperanza y varianza, notemos que \[
+\begin{align}
+\mathbb{E}[(X + \beta)^k] &= \int_0^\infty\frac{(x+b)^k\alpha\beta^\alpha}{(x+\beta)^{\alpha+1}} \\
+&= \int_0^\infty \frac{\alpha \beta^\alpha}{(\beta+x)^{\alpha + 1 - k}} dx \\
+&= \int_0^\infty\frac{\alpha \beta^k}{\alpha-k} \frac{(\alpha-k) \beta^{\alpha-k}}{(\beta+x)^{\alpha-k+1}} dx \\
+&= \frac{\alpha \beta^k}{\alpha-k} \int_0^\infty f_Y(x) dx \\
+&=\frac{\alpha \beta^k}{\alpha-k}
+\end{align}
+\]
+
+Donde \(Y~Pareto(\alpha-k, \beta)\) (la misma familia que \(X\)).
+
+Luego,
+
+\[
+\begin{align}
+\mathbb{E}[X] &=  \mathbb{E}[X+\beta]-\beta \\
+&= \frac{\alpha\beta}{\alpha-1} - \beta  \\
+&= \frac{\beta}{\alpha-1}
+\end{align}
+\]
+
+\[
+\begin{align}
+\mathrm{Var}(X) &= \mathbb{E}[X^2]-\mathbb{E}[X]^2 \\
+&=  \mathbb{E}[(X+\beta)^2] - 2\beta\mathbb{E}[X] - \beta^2 - \mathbb{E}[X]^2 \\ 
+&=\frac{\alpha \beta^2}{\alpha-2} - \frac{2\beta^2}{\alpha-1} - \beta^2 -\left( \frac{\beta}{\alpha-1}\right)^2 \\ 
+&= \frac{\alpha \beta^2}{(\alpha-1)^2(\alpha-2)}
+\end{align}
+\]
+
+Y para muestrear, usamos el método de la transformación inversa \[
+\begin{align}
+y=1-\left( \frac{\beta}{x+\beta} \right)^\alpha &\Leftrightarrow 1-y=\left( \frac{\beta}{x+\beta} \right)^\alpha \\
+&\Leftrightarrow (1-y)^{\frac{1}{\alpha}} = \frac{\beta}{x+\beta} \\
+&\Leftrightarrow \beta (1-y)^{-\frac{1}{\alpha}} - \beta = x
+\end{align}
+\]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{qpareto <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x, alpha, beta)\{}
+\NormalTok{  beta}\OperatorTok{*}\NormalTok{((}\DecValTok{1}\OperatorTok{-}\NormalTok{x)}\OperatorTok{^}\NormalTok{(}\OperatorTok{-}\DecValTok{1}\OperatorTok{/}\NormalTok{alpha) }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{)}
+\NormalTok{\}}
+
+\NormalTok{ppareto <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x, alpha, beta)\{}
+  \DecValTok{1}\OperatorTok{-}\NormalTok{(}\DecValTok{1}\OperatorTok{+}\NormalTok{x}\OperatorTok{/}\NormalTok{beta)}\OperatorTok{^}\NormalTok{(}\OperatorTok{-}\NormalTok{alpha)}
+\NormalTok{\}}
+
+\NormalTok{rpareto <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(n, alpha, beta)\{}
+\NormalTok{  u <-}\StringTok{ }\KeywordTok{runif}\NormalTok{(n)}
+  \KeywordTok{qpareto}\NormalTok{(u, alpha, beta)}
+\NormalTok{\}}
+
+\NormalTok{x_sample <-}\StringTok{ }\KeywordTok{data_frame}\NormalTok{(}\DataTypeTok{simulado=}\KeywordTok{rpareto}\NormalTok{(}\DecValTok{1000}\NormalTok{,}\DecValTok{5}\NormalTok{, }\DecValTok{125000}\NormalTok{))}
+  
+\KeywordTok{ggplot}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{stat_ecdf}\NormalTok{(}\DataTypeTok{data=}\NormalTok{x_sample, }
+            \DataTypeTok{mapping=}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{simulado, }\DataTypeTok{colour=}\StringTok{'simulado'}\NormalTok{), }
+            \DataTypeTok{geom=}\StringTok{'step'}\NormalTok{, }
+            \DataTypeTok{pad =}\NormalTok{ F) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{stat_function}\NormalTok{(}\DataTypeTok{data=}\KeywordTok{data_frame}\NormalTok{(}\DataTypeTok{mx=}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\KeywordTok{max}\NormalTok{(x_sample}\OperatorTok{$}\NormalTok{simulado))),}
+                \DataTypeTok{mapping=}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{colour=}\StringTok{'teórico'),}
+\StringTok{                fun=function(x) ppareto(x,5,125000))+}
+\StringTok{  labs(x='}\NormalTok{x}\StringTok{', y='}\KeywordTok{F}\NormalTok{(x)}\StringTok{')}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{sim-t3-sol_files/figure-latex/unnamed-chunk-3-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ks.test}\NormalTok{(x_sample}\OperatorTok{$}\NormalTok{simulado, }\StringTok{'ppareto'}\NormalTok{, }\DataTypeTok{alpha=}\DecValTok{5}\NormalTok{, }\DataTypeTok{beta=}\DecValTok{125000}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  One-sample Kolmogorov-Smirnov test
+## 
+## data:  x_sample$simulado
+## D = 0.02736, p-value = 0.4425
+## alternative hypothesis: two-sided
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{rm}\NormalTok{(x_sample)}
+\end{Highlighting}
+\end{Shaded}
+
+La prueba no da evidencia para rechazar la hipótesis nula, y en la
+gráfica sí se ven similares ambas distribuciones.
+
+Escriba una función para simular los activos de la compañía por cinco
+años
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{activos <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(activo_inicial, n_clientes, prima, p, horizonte, alpha, beta)\{}
+
+\NormalTok{  z <-}\StringTok{ }\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,horizonte}\OperatorTok{+}\DecValTok{1}\NormalTok{)}
+\NormalTok{  z[}\DecValTok{1}\NormalTok{] <-}\StringTok{ }\NormalTok{activo_inicial}
+
+  \ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{2}\OperatorTok{:}\NormalTok{(horizonte}\OperatorTok{+}\DecValTok{1}\NormalTok{))\{}
+
+    \ControlFlowTok{if}\NormalTok{(z[i}\DecValTok{-1}\NormalTok{] }\OperatorTok{<=}\StringTok{ }\DecValTok{0}\NormalTok{) }\ControlFlowTok{break}
+
+\NormalTok{    reclamos <-}\StringTok{ }\KeywordTok{rbernoulli}\NormalTok{(n_clientes, p)}
+\NormalTok{    montos <-}\StringTok{ }\KeywordTok{rpareto}\NormalTok{(n_clientes, alpha, beta)}\OperatorTok{*}\NormalTok{reclamos}
+\NormalTok{    z[i] <-}\StringTok{ }\KeywordTok{max}\NormalTok{(z[i}\DecValTok{-1}\NormalTok{]}\OperatorTok{+}\NormalTok{n_clientes}\OperatorTok{*}\NormalTok{prima}\OperatorTok{-}\KeywordTok{sum}\NormalTok{(montos), }\DecValTok{0}\NormalTok{)}
+\NormalTok{  \}}
+  
+\NormalTok{  z}
+\NormalTok{\}}
+
+\NormalTok{activos_n<-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(n, }\DataTypeTok{n_clientes=}\DecValTok{1000}\NormalTok{, }
+                     \DataTypeTok{activo_inicial=}\FloatTok{1e6}\NormalTok{, }\DataTypeTok{prima=}\DecValTok{5500}\NormalTok{, }\DataTypeTok{p=}\FloatTok{0.1}\NormalTok{,}
+                     \DataTypeTok{alpha=}\DecValTok{5}\NormalTok{, }\DataTypeTok{beta=}\DecValTok{125000}\NormalTok{, }
+                     \DataTypeTok{horizonte=}\DecValTok{5}\NormalTok{)\{}
+  \KeywordTok{replicate}\NormalTok{(n, }\KeywordTok{activos}\NormalTok{(activo_inicial, n_clientes, prima, p, horizonte, alpha, beta)) }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{t}\NormalTok{()}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Estime la probabilidad de que la compañía se vaya a bancarrota
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{mean}\NormalTok{(}\KeywordTok{activos_n}\NormalTok{(}\DecValTok{10000}\NormalTok{)[,}\DecValTok{6}\NormalTok{]}\OperatorTok{==}\DecValTok{0}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1e-04
+\end{verbatim}
+
+Y la ganancia esperada
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{mean}\NormalTok{(}\KeywordTok{activos_n}\NormalTok{(}\DecValTok{10000}\NormalTok{)[,}\DecValTok{6}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 12860946
+\end{verbatim}
+
+Suponga ahora que la compañía toma ganancias. Repita las preguntas
+anteriores.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{activos_gan <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(activo_inicial, n_clientes, prima, p, horizonte, alpha, beta)\{}
+
+\NormalTok{  z <-}\StringTok{ }\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,horizonte}\OperatorTok{+}\DecValTok{1}\NormalTok{)}
+\NormalTok{  ganancias <-}\StringTok{ }\DecValTok{0}
+\NormalTok{  z[}\DecValTok{1}\NormalTok{] <-}\StringTok{ }\NormalTok{activo_inicial}
+
+  \ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{2}\OperatorTok{:}\NormalTok{(horizonte}\OperatorTok{+}\DecValTok{1}\NormalTok{))\{}
+
+    \ControlFlowTok{if}\NormalTok{(z[i}\DecValTok{-1}\NormalTok{] }\OperatorTok{<=}\StringTok{ }\DecValTok{0}\NormalTok{) }\ControlFlowTok{break}
+
+\NormalTok{    reclamos <-}\StringTok{ }\KeywordTok{rbernoulli}\NormalTok{(n_clientes, p)}
+\NormalTok{    montos <-}\StringTok{ }\KeywordTok{rpareto}\NormalTok{(n_clientes, alpha, beta)}\OperatorTok{*}\NormalTok{reclamos}
+
+\NormalTok{    z[i] <-}\StringTok{ }\NormalTok{z[i}\DecValTok{-1}\NormalTok{] }\OperatorTok{+}\StringTok{ }\NormalTok{n_clientes}\OperatorTok{*}\NormalTok{prima }\OperatorTok{-}\StringTok{ }\KeywordTok{sum}\NormalTok{(montos)}
+    
+    \ControlFlowTok{if}\NormalTok{(z[i] }\OperatorTok{>}\StringTok{ }\NormalTok{activo_inicial)\{}
+\NormalTok{      ganancias <-}\StringTok{ }\NormalTok{ganancias }\OperatorTok{+}\StringTok{ }\NormalTok{z[i] }\OperatorTok{-}\StringTok{ }\NormalTok{activo_inicial}
+\NormalTok{      z[i] <-}\StringTok{ }\NormalTok{activo_inicial}
+\NormalTok{    \}}
+\NormalTok{  \}}
+  
+\NormalTok{  z}
+\NormalTok{\}}
+
+\NormalTok{activos_gan_n<-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(n, }\DataTypeTok{n_clientes=}\DecValTok{1000}\NormalTok{, }
+                     \DataTypeTok{activo_inicial=}\FloatTok{1e6}\NormalTok{, }\DataTypeTok{prima=}\DecValTok{5500}\NormalTok{, }\DataTypeTok{p=}\FloatTok{0.1}\NormalTok{,}
+                     \DataTypeTok{alpha=}\DecValTok{5}\NormalTok{, }\DataTypeTok{beta=}\DecValTok{125000}\NormalTok{, }
+                     \DataTypeTok{horizonte=}\DecValTok{5}\NormalTok{)\{}
+  \KeywordTok{replicate}\NormalTok{(n, }\KeywordTok{activos_gan}\NormalTok{(activo_inicial, n_clientes, prima, p, horizonte, alpha, beta)) }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{t}\NormalTok{()}
+\NormalTok{\}}
+
+\NormalTok{nueva_forma <-}\StringTok{ }\KeywordTok{activos_gan_n}\NormalTok{(}\DecValTok{1000}\NormalTok{)}
+
+\KeywordTok{mean}\NormalTok{(nueva_forma[,}\DecValTok{6}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1e+06
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{mean}\NormalTok{(nueva_forma[,}\DecValTok{6}\NormalTok{]}\OperatorTok{==}\DecValTok{0}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0
+\end{verbatim}
+
+\hypertarget{pregunta-3}{%
+\subsection{Pregunta 3}\label{pregunta-3}}
+
+Las densidades dadas son:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cauchy <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x, beta, gamma)\{ }
+  \DecValTok{1} \OperatorTok{/}\StringTok{ }\NormalTok{(pi}\OperatorTok{*}\NormalTok{beta}\OperatorTok{*}\NormalTok{(}\DecValTok{1} \OperatorTok{+}\StringTok{ }\NormalTok{((x}\OperatorTok{-}\NormalTok{gamma)}\OperatorTok{/}\NormalTok{beta)}\OperatorTok{^}\DecValTok{2}\NormalTok{))}
+\NormalTok{\}}
+\NormalTok{gumbel <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x, beta, gamma)\{ }
+\NormalTok{  (}\DecValTok{1} \OperatorTok{/}\StringTok{ }\NormalTok{beta) }\OperatorTok{*}\KeywordTok{exp}\NormalTok{(}\OperatorTok{-}\KeywordTok{exp}\NormalTok{(}\OperatorTok{-}\NormalTok{(x}\OperatorTok{-}\NormalTok{gamma)}\OperatorTok{/}\NormalTok{beta) }\OperatorTok{-}\StringTok{ }\NormalTok{(x}\OperatorTok{-}\NormalTok{gamma)}\OperatorTok{/}\NormalTok{beta)}
+\NormalTok{\}}
+\NormalTok{logistic <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x, beta, gamma)\{}
+\NormalTok{  ( (}\DecValTok{1}\OperatorTok{/}\NormalTok{beta)}\OperatorTok{*}\KeywordTok{exp}\NormalTok{(}\OperatorTok{-}\NormalTok{(x}\OperatorTok{-}\NormalTok{gamma)}\OperatorTok{/}\NormalTok{beta) ) }\OperatorTok{/}\StringTok{ }\NormalTok{((}\DecValTok{1} \OperatorTok{+}\StringTok{ }\KeywordTok{exp}\NormalTok{(}\OperatorTok{-}\NormalTok{(x)))}\OperatorTok{^}\DecValTok{2}\NormalTok{)}
+\NormalTok{\}}
+\NormalTok{pareto <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x, c, alpha)\{}
+\NormalTok{  alpha}\OperatorTok{*}\NormalTok{((c}\OperatorTok{^}\NormalTok{alpha))}\OperatorTok{/}\NormalTok{(x}\OperatorTok{^}\NormalTok{(alpha}\OperatorTok{+}\DecValTok{1}\NormalTok{))}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{cauchy}{%
+\paragraph{Cauchy}\label{cauchy}}
+
+Para generar la muestra aleatoria de la distribución Cauchy podemos usar
+el teorema de la transformada inversa y obtenemos la siguiente función:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rcauchy_ <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(n, beta, gamma)\{}
+\NormalTok{  u <-}\StringTok{ }\KeywordTok{runif}\NormalTok{(n)}
+\NormalTok{  cauchy_sample <-}\StringTok{ }\KeywordTok{tan}\NormalTok{(pi}\OperatorTok{*}\NormalTok{(u}\DecValTok{-1}\OperatorTok{/}\DecValTok{2}\NormalTok{))}\OperatorTok{*}\NormalTok{beta }\OperatorTok{+}\StringTok{ }\NormalTok{gamma}
+  \KeywordTok{return}\NormalTok{ (cauchy_sample)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Probando el método
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{beta <-}\StringTok{ }\DecValTok{1}
+\NormalTok{gamma <-}\StringTok{ }\DecValTok{0}
+\NormalTok{n <-}\StringTok{ }\DecValTok{5000}
+\NormalTok{cauchy_sample =}\StringTok{ }\KeywordTok{rcauchy_}\NormalTok{(n, beta, gamma)}
+\KeywordTok{hist}\NormalTok{(cauchy_sample, }\DataTypeTok{xlim =}\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{10}\NormalTok{,}\DecValTok{10}\NormalTok{), }\DataTypeTok{breaks =} \KeywordTok{c}\NormalTok{(}\KeywordTok{min}\NormalTok{(cauchy_sample),}\KeywordTok{seq}\NormalTok{(}\DataTypeTok{from=}\OperatorTok{-}\DecValTok{10}\NormalTok{,}\DataTypeTok{to=}\DecValTok{10}\NormalTok{,}\DataTypeTok{by=}\NormalTok{.}\DecValTok{25}\NormalTok{), }\KeywordTok{max}\NormalTok{(cauchy_sample)), }\DataTypeTok{prob =}\NormalTok{ T)}
+\KeywordTok{curve}\NormalTok{(}\KeywordTok{cauchy}\NormalTok{(x,beta,gamma),}\DataTypeTok{from=}\OperatorTok{-}\DecValTok{25}\NormalTok{,}\DataTypeTok{to=}\DecValTok{25}\NormalTok{,}\DataTypeTok{col=}\StringTok{"blue"}\NormalTok{, }\DataTypeTok{add =}\NormalTok{ T)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{sim-t3-sol_files/figure-latex/unnamed-chunk-10-1.pdf}
+
+La muestra generada efectivamente sigue una distribución Cauchy.
+
+Verificando empíricamente la ley fuerte de los grandes números:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{n_values =}\StringTok{ }\KeywordTok{seq}\NormalTok{(}\DataTypeTok{from=}\DecValTok{50}\NormalTok{, }\DataTypeTok{to=}\DecValTok{5000}\NormalTok{, }\DataTypeTok{by=}\DecValTok{50}\NormalTok{)}
+\NormalTok{x_barras =}\StringTok{ }\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,}\KeywordTok{length}\NormalTok{(n_values))}
+\ControlFlowTok{for}\NormalTok{ (n }\ControlFlowTok{in}\NormalTok{ n_values)\{}
+\NormalTok{  x_barras[n}\OperatorTok{/}\DecValTok{50}\NormalTok{] =}\StringTok{ }\KeywordTok{sum}\NormalTok{(}\KeywordTok{rcauchy_}\NormalTok{(n, beta, gamma))}\OperatorTok{/}\NormalTok{n}
+\NormalTok{\}}
+\KeywordTok{plot}\NormalTok{(x_barras)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{sim-t3-sol_files/figure-latex/unnamed-chunk-11-1.pdf}
+Los valores oscilan alrededor del cero pero hay algunos valores que
+difieren mucho, esto es normal puesto que la distribución Cauchy no
+tiene media.
+
+\hypertarget{gumbel}{%
+\paragraph{Gumbel}\label{gumbel}}
+
+Dado que la función de distribución es
+\(e^{-e^{-\frac{x-\gamma}{\beta}}}\), invirtiendo tendremos
+\(X = -\beta \log(-\log(u)) + \gamma\), usando el teorema de la
+transformación inversa:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rgumbel_ <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(n,beta, gamma)\{}
+\NormalTok{  u <-}\StringTok{ }\KeywordTok{runif}\NormalTok{(n)}
+\NormalTok{  gumbel_sample <-}\StringTok{ }\OperatorTok{-}\NormalTok{beta}\OperatorTok{*}\KeywordTok{log}\NormalTok{(}\OperatorTok{-}\KeywordTok{log}\NormalTok{(u)) }\OperatorTok{+}\StringTok{ }\NormalTok{gamma}
+  \KeywordTok{return}\NormalTok{ (gumbel_sample)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Probando el método
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{gumbel_sample =}\StringTok{ }\KeywordTok{rgumbel_}\NormalTok{(}\DecValTok{5000}\NormalTok{,beta,gamma)}
+\KeywordTok{hist}\NormalTok{(gumbel_sample, }\DataTypeTok{breaks =} \DecValTok{50}\NormalTok{, }\DataTypeTok{prob =}\NormalTok{ T)}
+\KeywordTok{curve}\NormalTok{(}\KeywordTok{gumbel}\NormalTok{(x,beta,gamma),}\DataTypeTok{from=}\OperatorTok{-}\DecValTok{10}\NormalTok{,}\DataTypeTok{to=}\DecValTok{10}\NormalTok{,}\DataTypeTok{col=}\StringTok{"red"}\NormalTok{, }\DataTypeTok{add=}\NormalTok{T)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{sim-t3-sol_files/figure-latex/unnamed-chunk-13-1.pdf}
+La muestra generada efectivamente sigue una distribución Gumbel.
+
+Verificando empíricamente la ley fuerte de los grandes números:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x_barras =}\StringTok{ }\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,}\KeywordTok{length}\NormalTok{(n_values))}
+\ControlFlowTok{for}\NormalTok{ (n }\ControlFlowTok{in}\NormalTok{ n_values)\{}
+\NormalTok{  x_barras[n}\OperatorTok{/}\DecValTok{50}\NormalTok{] =}\StringTok{ }\KeywordTok{sum}\NormalTok{(}\KeywordTok{rgumbel_}\NormalTok{(n, beta, gamma))}\OperatorTok{/}\NormalTok{n}
+\NormalTok{\}}
+\KeywordTok{plot}\NormalTok{(x_barras)}
+\KeywordTok{abline}\NormalTok{(}\DataTypeTok{h=}\NormalTok{(gamma }\OperatorTok{+}\StringTok{ }\NormalTok{beta}\OperatorTok{*}\FloatTok{0.5772}\NormalTok{), }\DataTypeTok{col=}\StringTok{'red'}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{sim-t3-sol_files/figure-latex/unnamed-chunk-14-1.pdf}
+La media teórica es \(\gamma + \beta*c\) donde \(c\) es la constante de
+Euler--Mascheroni, en la gráfica notamos que, efectivamente, se cumple
+empíricamente la Ley fuerte de los grandes números.
+
+\hypertarget{logistica}{%
+\paragraph{Logística}\label{logistica}}
+
+Dado que la función de distribución es
+\(\frac{1}{1+e^{-(x-\gamma)/\beta}}\), invirtiendo tendremos
+\(X = -\beta \log(\frac{1}{u} -1) + \gamma\), usando el teorema de la
+transformación inversa:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rlogistic_ <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(n,beta,gamma)\{}
+\NormalTok{  u <-}\StringTok{ }\KeywordTok{runif}\NormalTok{(n)}
+\NormalTok{  logistic_sample <-}\StringTok{ }\OperatorTok{-}\NormalTok{beta}\OperatorTok{*}\KeywordTok{log}\NormalTok{(}\DecValTok{1}\OperatorTok{/}\NormalTok{u }\DecValTok{-1}\NormalTok{) }\OperatorTok{+}\StringTok{ }\NormalTok{gamma}
+  \KeywordTok{return}\NormalTok{ (logistic_sample)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Probando el método
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{logistic_sample =}\StringTok{ }\KeywordTok{rlogistic_}\NormalTok{(}\DecValTok{5000}\NormalTok{,beta,gamma)}
+\KeywordTok{hist}\NormalTok{(logistic_sample, }\DataTypeTok{breaks =} \DecValTok{50}\NormalTok{, }\DataTypeTok{prob =}\NormalTok{ T)}
+\KeywordTok{curve}\NormalTok{(}\KeywordTok{logistic}\NormalTok{(x,beta,gamma),}\DataTypeTok{from=}\OperatorTok{-}\DecValTok{10}\NormalTok{,}\DataTypeTok{to=}\DecValTok{10}\NormalTok{,}\DataTypeTok{col=}\StringTok{"red"}\NormalTok{, }\DataTypeTok{add=}\NormalTok{T)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{sim-t3-sol_files/figure-latex/unnamed-chunk-16-1.pdf}
+La muestra generada efectivamente sigue una distribución Logística
+
+Verificando empíricamente la ley fuerte de los grandes números:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x_barras =}\StringTok{ }\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,}\KeywordTok{length}\NormalTok{(n_values))}
+\ControlFlowTok{for}\NormalTok{ (n }\ControlFlowTok{in}\NormalTok{ n_values)\{}
+\NormalTok{  x_barras[n}\OperatorTok{/}\DecValTok{50}\NormalTok{] =}\StringTok{ }\KeywordTok{sum}\NormalTok{(}\KeywordTok{rlogistic_}\NormalTok{(n, beta, gamma))}\OperatorTok{/}\NormalTok{n}
+\NormalTok{\}}
+\KeywordTok{plot}\NormalTok{(x_barras)}
+\KeywordTok{abline}\NormalTok{(}\DataTypeTok{h=}\NormalTok{gamma,}\DataTypeTok{col=}\StringTok{"red"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{sim-t3-sol_files/figure-latex/unnamed-chunk-17-1.pdf}
+La media teórica es \(\gamma\). En la gráfica notamos que,
+efectivamente, se cumple empíricamente la Ley fuerte de los grandes
+números.
+
+\hypertarget{pareto}{%
+\paragraph{Pareto}\label{pareto}}
+
+La inversa de la función de distribución está dada por
+\(X = \frac{c}{u^{1/\alpha}}\), usando el teorema de la transformada
+inversa:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rpareto_ <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(n,c,alpha)\{}
+\NormalTok{  u <-}\StringTok{ }\KeywordTok{runif}\NormalTok{(n)}
+\NormalTok{  pareto_sample <-}\StringTok{ }\NormalTok{c }\OperatorTok{/}\StringTok{ }\NormalTok{(u}\OperatorTok{^}\NormalTok{(}\DecValTok{1}\OperatorTok{/}\NormalTok{alpha))}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Probando el método
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{c <-}\StringTok{ }\DecValTok{1}
+\NormalTok{alpha <-}\StringTok{ }\DecValTok{2}
+\NormalTok{pareto_sample =}\StringTok{ }\KeywordTok{rpareto_}\NormalTok{(}\DecValTok{5000}\NormalTok{,c,alpha)}
+\KeywordTok{hist}\NormalTok{(pareto_sample, }\DataTypeTok{xlim=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{5}\NormalTok{), }\DataTypeTok{breaks =} \KeywordTok{c}\NormalTok{(}\KeywordTok{seq}\NormalTok{(}\DataTypeTok{from=}\OperatorTok{-}\DecValTok{10}\NormalTok{,}\DataTypeTok{to=}\DecValTok{10}\NormalTok{,}\DataTypeTok{by=}\NormalTok{.}\DecValTok{25}\NormalTok{),}\KeywordTok{max}\NormalTok{(pareto_sample)), }\DataTypeTok{prob =}\NormalTok{ T)}
+\KeywordTok{curve}\NormalTok{(}\KeywordTok{pareto}\NormalTok{(x,c,alpha),}\DataTypeTok{from=}\DecValTok{1}\NormalTok{,}\DataTypeTok{to=}\DecValTok{5}\NormalTok{,}\DataTypeTok{col=}\StringTok{"blue"}\NormalTok{, }\DataTypeTok{add =}\NormalTok{ T)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{sim-t3-sol_files/figure-latex/unnamed-chunk-19-1.pdf}
+La muestra generada efectivamente sigue una distribución Pareto.
+
+Verificando empíricamente la ley fuerte de los grandes números:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x_barras =}\StringTok{ }\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,}\KeywordTok{length}\NormalTok{(n_values))}
+\ControlFlowTok{for}\NormalTok{ (n }\ControlFlowTok{in}\NormalTok{ n_values)\{}
+\NormalTok{  x_barras[n}\OperatorTok{/}\DecValTok{50}\NormalTok{] =}\StringTok{ }\KeywordTok{sum}\NormalTok{(}\KeywordTok{rpareto_}\NormalTok{(n, c, alpha))}\OperatorTok{/}\NormalTok{n}
+\NormalTok{\}}
+\KeywordTok{plot}\NormalTok{(x_barras)}
+\KeywordTok{abline}\NormalTok{(}\DataTypeTok{h=}\DecValTok{2}\NormalTok{,}\DataTypeTok{col=}\StringTok{"red"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{sim-t3-sol_files/figure-latex/unnamed-chunk-20-1.pdf}
+La media teórica es \$\frac{c \ \alpha}{\alpha -1} = 2 \$. En la gráfica
+notamos que, efectivamente, se cumple empíricamente la Ley fuerte de los
+grandes números.
+
+\hypertarget{pregunta-3-1}{%
+\subsubsection{Pregunta 3}\label{pregunta-3-1}}
+
+Grafique las densidades indicadas, y dé algoritmos de transformación
+inversa, composición y aceptación-rechazo para cada una de ellas.
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  \[
+  f(x) = \frac{3x^2}{2} \mathcal{I}_{[-1,1]}(x)
+  \]
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{x=}\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\FloatTok{1.2}\NormalTok{,}\FloatTok{1.2}\NormalTok{)), }\KeywordTok{aes}\NormalTok{(x)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{stat_function}\NormalTok{(}\DataTypeTok{fun =} \ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{ifelse}\NormalTok{(x}\OperatorTok{>=}\StringTok{ }\DecValTok{-1} \OperatorTok{&}\StringTok{ }\NormalTok{x }\OperatorTok{<=}\StringTok{ }\DecValTok{1}\NormalTok{, }\DecValTok{3}\OperatorTok{/}\DecValTok{2}\OperatorTok{*}\NormalTok{x}\OperatorTok{^}\DecValTok{2}\NormalTok{, }\DecValTok{0}\NormalTok{)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x=}\StringTok{'x'}\NormalTok{, }\DataTypeTok{y=}\StringTok{'f(x)'}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{sim-t3-sol_files/figure-latex/unnamed-chunk-21-1.pdf}
+
+Y \(F(x) = \int_{-1}^x \frac{3t^2}{2} dt = \frac{1}{2}(x^3+1)\), por lo
+que la función cuantil es \(F^{-1}(x) = \sqrt[3]{2x^3-1}\).
+
+El método de aceptación-rechazo sería generar parejas \((u,v)\), donde
+\(u \sim \textrm{Unif}(-1,1)\) y \(v \sim \textrm{Unif}(0,1.5)\), y nos
+quedamos con aquellos puntos que satisfacen \(v \leq f(u)\). Notemos que
+la tasa de aceptación es 1/3.
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  \[
+  g(x) = 
+  \begin{cases}
+  0, x\leq 0 \\
+  \frac{x}{a(1-a)}, 0 < x \leq a \\
+  \frac{1}{1-a}, a < x \leq 1-a \\
+  \frac{1-x}{a(1-a)}, 1-a < x \leq 1
+  0, x  > 1
+  \end{cases}
+  \]
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{g <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(a, x)\{}
+  \KeywordTok{ifelse}\NormalTok{(x}\OperatorTok{<=}\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{,}
+         \KeywordTok{ifelse}\NormalTok{(x }\OperatorTok{<=}\StringTok{ }\NormalTok{a, x}\OperatorTok{/}\NormalTok{(a}\OperatorTok{*}\NormalTok{(}\DecValTok{1}\OperatorTok{-}\NormalTok{a)), }
+                \KeywordTok{ifelse}\NormalTok{(x }\OperatorTok{<=}\StringTok{ }\DecValTok{1}\OperatorTok{-}\NormalTok{a, }\DecValTok{1}\OperatorTok{/}\NormalTok{(}\DecValTok{1}\OperatorTok{-}\NormalTok{a), }
+                       \KeywordTok{ifelse}\NormalTok{(x}\OperatorTok{<=}\StringTok{ }\DecValTok{1}\NormalTok{, (}\DecValTok{1}\OperatorTok{-}\NormalTok{x)}\OperatorTok{/}\NormalTok{(a}\OperatorTok{*}\NormalTok{(}\DecValTok{1}\OperatorTok{-}\NormalTok{a)),}\DecValTok{0}\NormalTok{))))}
+\NormalTok{\}}
+
+\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{x=}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{)), }\KeywordTok{aes}\NormalTok{(x)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{stat_function}\NormalTok{(}\DataTypeTok{fun =} \ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{g}\NormalTok{(}\DecValTok{1}\OperatorTok{/}\DecValTok{3}\NormalTok{, x)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{y=}\StringTok{'g(x)'}\NormalTok{, }\DataTypeTok{x=}\StringTok{'x'}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{sim-t3-sol_files/figure-latex/unnamed-chunk-22-1.pdf}
+
+En este caso, la tasa de aceptación para el algoritmo de
+aceptación-rechazo es 2/3, mejor que arriba.
+
+Para transformación inversa, la función de distribución es \[
+G(x) = 
+\begin{cases}
+0, x \leq 0 \\
+\frac{a^2-x^2}{2(a-1)a}, 0 < x \leq a\\
+\frac{a-x}{a-1}, a < x \leq 1-a \\
+\frac{(x-1)^2-a^2}{2(a-1)a}, 1-a < x \leq 1 \\
+0, x > 1
+\end{cases}
+\]
+
+\hypertarget{pregunta-5}{%
+\subsection{Pregunta 5}\label{pregunta-5}}
+
+Considerando la transformación polar de Marsaglia para generar muestras
+de normales estándar, muestren que la probabilidad de aceptación de
+\(S = V12 + V22\) en el paso 2 es \(\pi/4\), y encuentren la
+distribución del número de rechazos de S antes de que ocurra una
+aceptación. ¿Cuál es el número esperado de ejecuciones del paso 1?
+
+Se tienen \(V_1, V_2 \sim Unif(-1,1)\) y \(S=V_1^2 + V_2^2\) si
+\(V_1^2 + V_2^2 > 1\). Por un lado, el area de aceptación es un circulo
+de radio 1 y centrado en cero. Por otro lado el area total es el
+recuadro \([-1,1] \times [-1,1]\), el área del círculo es \(\pi\) y el
+area del recuadro es igual a dos por lo que la probabilidad de
+aceptación es \(\frac{\pi}{4}\)
+
+El número de rechazos de S antes de que ocurra una aceptación se
+distribuye como una geométrica con parámetro \(\frac{\pi}{4}\).
+
+Si \(X \sim Geom(\frac{\pi}{4})\), entonces eel número esperado de
+ejecuciones del paso 1 es igual a la esperanza X,
+\(E[X] = \frac{1}{\frac{\pi}{4}} = \frac{4}{pi}\)
+
+Que tiene función cuantil más o menos fea por la inversión de cosas no
+biyectivas, por lo que mejor podríamos usar el método de
+aceptación-rechazo.
+
+\hypertarget{pregunta-6}{%
+\subsection{Pregunta 6}\label{pregunta-6}}
+
+Obtenga 1000 números de la distribución \[
+p(x) = \frac{2x}{k(k+1)}, x\in\{1, \cdots, k\}
+\] para \(k = 100\).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{construir_tabla <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(k)\{}
+\NormalTok{  x <-}\StringTok{ }\DecValTok{1}\OperatorTok{:}\NormalTok{k}
+  \DecValTok{2}\OperatorTok{*}\NormalTok{x}\OperatorTok{/}\NormalTok{(k}\OperatorTok{*}\NormalTok{k}\OperatorTok{+}\DecValTok{1}\NormalTok{)}
+\NormalTok{\}}
+
+\NormalTok{rp <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(n, k)\{}
+\NormalTok{  pk <-}\StringTok{ }\DecValTok{2}\OperatorTok{*}\DecValTok{1}\OperatorTok{:}\NormalTok{k}\OperatorTok{/}\NormalTok{(k}\OperatorTok{*}\NormalTok{(k}\OperatorTok{+}\DecValTok{1}\NormalTok{))}
+  \KeywordTok{sample}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\NormalTok{k, n, }\DataTypeTok{replace =}\NormalTok{ T, }\DataTypeTok{prob=}\NormalTok{pk)}
+\NormalTok{\}}
+
+\KeywordTok{rp}\NormalTok{(}\DecValTok{1000}\NormalTok{,}\DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    [1]  9  8 10  6  2 10  8  6 10  3  9  2  8 10  7  2 10 10 10  7  1 10 10
+##   [24]  5  5  5  7  4  7  7  5  3  7  9  9  8  9 10 10  9  9  7  7  7  6  6
+##   [47]  6 10  7  5  5  8  6  9  6  2 10  2  8  7  6  5  6  9 10  4 10  5 10
+##   [70]  8 10  4  6  8  9  4  7  2  1 10 10  9  5  3  3  8  6  6  7  1  9  7
+##   [93]  7 10  8  3  2  7  5 10  4  5  5  3  7  6  3  4 10  6  2  9  5  8  9
+##  [116] 10  5  7  6  8  9  9  5  3  4  8  7 10  4  3  5 10  7  8  5  7  7  9
+##  [139]  3 10 10  8  5  9 10  4 10  9  7 10  5  1  6  6  9  7 10  7 10  4  4
+##  [162]  7  9  2  7  5  8 10  7 10  8  5  5  6  2 10  8  8  6  6  9  6 10 10
+##  [185]  7  4  5  4  6 10  9  8  5 10 10  7  9  7 10  6  4  7  8  9  7  3  7
+##  [208]  2 10  4  6  5  6  4  3  7 10  9  7  4  1  2  3  9  9  7  5  9  5  8
+##  [231] 10 10  2  5  7 10  8  2  6 10  9  8 10 10  3  7 10  9  8  3  9  8  8
+##  [254]  7 10  4  9  2  8  6  8  6  4  8  9  5  7  6  4 10  6  7  9 10  8  6
+##  [277] 10 10  4 10  9  5  3  7  5  6  7 10  9  3 10  5 10  5  8 10 10  9  4
+##  [300]  2 10  7  7  3 10  7  9  3  5  9  8  3  6  7  3 10  6 10  9  8  8  5
+##  [323]  9  8  7 10  9  1  9  4 10  3  4  1  8  9  6  8  6 10  3  5  7  7  9
+##  [346] 10  7  9  9 10  7 10  5  8  9 10  6 10  2 10  9  4  9  4  7 10 10 10
+##  [369] 10  5  7 10  3  6  5  5  1  9  9 10  7  5  7  4  8  7  8  8  8  6 10
+##  [392]  9  9 10  7 10 10  6 10  6  4  9  7  7  9  5 10  4  9  6  4  6 10  8
+##  [415]  8  8  9  9  6 10  9  6  5  6  7  9  5  9  7 10  9  8  7  8  4  2 10
+##  [438]  3 10  7 10  6  9  3 10  5  7  7  4  7  8  7  6  3 10  8 10  7  3  8
+##  [461]  6 10  5  6  9  9 10 10  6  3  7  4  6  6 10  6  2  9  8  7  8  7  8
+##  [484]  8  8  7  6  6  7  5 10  9 10  9 10 10  3 10  6  2  7  9  5  4  9  8
+##  [507]  9  7  7  6  7  8  9  6  4  6  8  8  9  1  3 10  1  8 10  8  9 10  2
+##  [530] 10  8  4  9  4  9  9  5  7  8  4  8 10  7 10  8 10  5  8  5  3  8  9
+##  [553] 10  4  2  9  7  9  6  8 10  7  7  4 10  5  5 10  6  3  9  2  8 10  8
+##  [576]  7 10  7  8 10  8  6  9  7  4 10 10 10  5 10  9  5  8 10  9 10  6  4
+##  [599]  7  6  4  3  3  9  8  9  3  9  9 10  9  7  8  7  6  3  7  8  9 10  8
+##  [622] 10  6 10  8  1  8  9  6  4 10  7  9  6  5  5 10  8  9  9 10  8 10  8
+##  [645] 10  1  4  5  8 10  7  7  8  3  9  9  4  6  8  3  5  7 10  9 10  3  7
+##  [668]  8  2  9 10  8 10  8  4  6  8  9  8  9 10  9  6  4  8  3  9  4  5  8
+##  [691] 10  4  3  3  6  3  6  6  4  8  6  4  5  9  7  8  8  8  9  9  7 10 10
+##  [714]  3  2  9  3 10  6  6  7  3  5  8  2  8  8  3  1  2  3 10  8  6  8  5
+##  [737]  6  9  9  5 10  4  2 10 10  2 10  1  9  4  9  3  9  8  5  5  8  8  7
+##  [760]  8 10  7  2  9  9  7  7  8  8 10 10 10  9  7  8  2 10  7  8  8  7  6
+##  [783]  9  4  9  9 10 10 10  1  8 10  9 10  2  4  6  7  6 10  8 10  9 10  7
+##  [806]  3  2  2 10  6  3  8  9  7  8  7 10  2 10  2  5  7  8  3  5  9  6 10
+##  [829]  4  7  8  7  9 10  6  9 10  4  8  6  4  5  9  7  9  7  2  8  8 10  5
+##  [852]  4  9 10  5 10  8 10  6 10  9  8  5  5  6  9  7  5 10  7  7  9  8  8
+##  [875]  5  7  9  9  9 10  9  6  7  7 10  1  9  8  3  2  8  1  6  8  6  5  1
+##  [898]  9  8  8 10  8  7 10  3 10  5  5  9 10  4  7  5  3  9  9 10  7  9  4
+##  [921] 10 10  8  9  7  9  5 10  3  5  5  5  7 10  5 10 10 10  8  8  5  8  9
+##  [944]  3  4  7  9  7  3  8 10  6  6  9  4  6  5  2  7 10  6  6  6  2  6 10
+##  [967]  7  6  6  7  8  1  8  9 10  9  9  8  8  8 10  9  7  9  9  6  7  7  9
+##  [990] 10  7  6  8  9  5  5  6  2 10  9
+\end{verbatim}
+
+\hypertarget{pregunta-7}{%
+\subsection{Pregunta 7}\label{pregunta-7}}
+
+Desarrollen un algoritmo para generar una variable aleatoria binomial,
+usando la técnica de convolución (Hint: ¿cuál es la relación entre
+binomiales y Bernoullis?) Generar una muestra de 100,000 números. ¿Qué
+método es más eficiente, el de con- voluciones o la función rbinom en R?
+
+Podemos usar el método de la convolución para generar la muestra
+aleatoria de una Binomial usando el hecho de que si
+\(X_i \sim Ber(p) \quad i\in\{1,...,n\}\) entonces
+\(\sum_{i=1}^n Xi \sim Bin(n,p)\).
+
+La siguiente función utiliza dicha información para generar la muestra
+aleatoria de tamaño n de una variable aleatoria binomial de parámetros
+n,p:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rbinom_ <-}\ControlFlowTok{function}\NormalTok{(n,size,p)\{}
+\NormalTok{  binomial_sample <-}\StringTok{ }\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,n)}
+  \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\NormalTok{n)\{}
+\NormalTok{    binomial_sample[i] <-}\StringTok{ }\KeywordTok{sum}\NormalTok{(}\KeywordTok{sample}\NormalTok{(}\DecValTok{0}\OperatorTok{:}\DecValTok{1}\NormalTok{, }\DataTypeTok{size=}\NormalTok{size,}\DataTypeTok{replace=}\NormalTok{T, }\DataTypeTok{prob=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\OperatorTok{-}\NormalTok{p,p)))}
+\NormalTok{  \}}
+  \KeywordTok{return}\NormalTok{(binomial_sample)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Finalmente, comparemos los tiempos de ejecución para ver cual es más
+eficiente:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{system.time}\NormalTok{(}\KeywordTok{rbinom_}\NormalTok{(}\DecValTok{1000}\NormalTok{,}\DecValTok{10}\NormalTok{,.}\DecValTok{5}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    user  system elapsed 
+##   0.010   0.000   0.011
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{system.time}\NormalTok{(}\KeywordTok{rbinom}\NormalTok{(}\DecValTok{1000}\NormalTok{,}\DecValTok{10}\NormalTok{,.}\DecValTok{5}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    user  system elapsed 
+##       0       0       0
+\end{verbatim}
+
+Como era de esperarse, la función de R es más eficiente. El algoritmo
+utilizado por R es llamado el algoritmo BTPEC para samplear normales
+(Kachitvichyanukul, V. and Schmeiser, B. W. (1988). Binomial random
+variate generation.)
+
+\hypertarget{pregunta-8}{%
+\subsection{Pregunta 8}\label{pregunta-8}}
+
+Para un proceso Poisson no homogéneo con función de intensidad dada por
+
+\[
+\lambda(t)= 
+\begin{cases}
+5, t\in(1,2],(3,4], \cdots \\
+3, t \in (0,1], (2,3], \cdots 
+\end{cases}
+\]
+
+Grafique un ejemplo del proceso, considerando en intervalo de tiempo
+\([0,100]\)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Generar primeros N eventos}
+\NormalTok{poisson_nh <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(lambda, cota, }\DataTypeTok{N=}\DecValTok{0}\NormalTok{, }\DataTypeTok{Tmax=}\OtherTok{Inf}\NormalTok{, }\DataTypeTok{by_time=}\NormalTok{T)\{}
+\NormalTok{  t_inter <-}\StringTok{ }\DecValTok{0}
+\NormalTok{  t_actual <-}\StringTok{ }\DecValTok{0}
+\NormalTok{  tiempo_evento <-}\StringTok{ }\KeywordTok{integer}\NormalTok{()}
+\NormalTok{  n <-}\StringTok{ }\DecValTok{0}
+  
+  \ControlFlowTok{while}\NormalTok{((by_time }\OperatorTok{&}\StringTok{ }\NormalTok{t_actual}\OperatorTok{<}\NormalTok{Tmax) }\OperatorTok{|}\StringTok{ }\NormalTok{(}\OperatorTok{!}\NormalTok{by_time }\OperatorTok{&}\StringTok{ }\NormalTok{n}\OperatorTok{<}\NormalTok{N))\{}
+\NormalTok{    t_inter <-}\StringTok{ }\KeywordTok{rexp}\NormalTok{(}\DecValTok{1}\NormalTok{, cota)}
+\NormalTok{    t_actual <-}\StringTok{ }\NormalTok{t_actual }\OperatorTok{+}\StringTok{ }\NormalTok{t_inter}
+    \ControlFlowTok{if}\NormalTok{(}\KeywordTok{runif}\NormalTok{(}\DecValTok{1}\NormalTok{) }\OperatorTok{<}\StringTok{ }\KeywordTok{lambda}\NormalTok{(t_actual)}\OperatorTok{/}\NormalTok{cota)\{}
+\NormalTok{      n <-}\StringTok{ }\NormalTok{n}\OperatorTok{+}\DecValTok{1}
+      \ControlFlowTok{if}\NormalTok{(t_actual}\OperatorTok{<}\NormalTok{Tmax)}
+\NormalTok{        tiempo_evento <-}\StringTok{ }\KeywordTok{c}\NormalTok{(tiempo_evento, t_actual)}
+\NormalTok{    \}}
+\NormalTok{  \}}
+  
+\NormalTok{  tiempo_evento}
+\NormalTok{\}}
+
+
+\NormalTok{lambda <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(t)\{}
+  \KeywordTok{ifelse}\NormalTok{(}\KeywordTok{floor}\NormalTok{(t)}\OperatorTok{%%}\DecValTok{2}\OperatorTok{==}\DecValTok{1}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{3}\NormalTok{)}
+\NormalTok{\}}
+
+\NormalTok{poisson_plot<-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(t)\{}
+  \KeywordTok{data_frame}\NormalTok{(}\DataTypeTok{ns=}\DecValTok{1}\OperatorTok{:}\KeywordTok{length}\NormalTok{(t),}
+           \DataTypeTok{tiempo=}\NormalTok{t) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{t, }\DataTypeTok{y=}\NormalTok{ns)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_step}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x=}\StringTok{'t'}\NormalTok{, }\DataTypeTok{y=}\StringTok{'N(t)'}\NormalTok{)}
+\NormalTok{\}}
+
+\KeywordTok{poisson_nh}\NormalTok{(lambda, }\DecValTok{5}\NormalTok{, }\DataTypeTok{Tmax=}\DecValTok{100}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{poisson_plot}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{sim-t3-sol_files/figure-latex/unnamed-chunk-26-1.pdf}
+
+Grafique el proceso hasta obtener 100 eventos
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{poisson_nh}\NormalTok{(lambda, }\DecValTok{5}\NormalTok{, }\DataTypeTok{N=}\DecValTok{100}\NormalTok{, }\DataTypeTok{by_time=}\NormalTok{F) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{poisson_plot}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{sim-t3-sol_files/figure-latex/unnamed-chunk-27-1.pdf}
+
+Estime la probabilidad de que el número de eventos observados en el
+periodo de tiempo (1.25,3{]} sea mayor a dos.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{count_obs <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(t, lb)\{}
+
+  \ControlFlowTok{if}\NormalTok{(}\KeywordTok{length}\NormalTok{(}\KeywordTok{which}\NormalTok{(t}\OperatorTok{<}\NormalTok{lb))}\OperatorTok{==}\DecValTok{0}\NormalTok{)}
+    \DecValTok{0}
+  \ControlFlowTok{else}
+    \KeywordTok{length}\NormalTok{(t) }\OperatorTok{-}\StringTok{ }\KeywordTok{max}\NormalTok{(}\KeywordTok{which}\NormalTok{(t}\OperatorTok{<}\NormalTok{lb))}
+\NormalTok{\}}
+
+\KeywordTok{replicate}\NormalTok{(}\DecValTok{10000}\NormalTok{, }\KeywordTok{poisson_nh}\NormalTok{(lambda, }\DecValTok{5}\NormalTok{, }\DataTypeTok{Tmax=}\DecValTok{3}\NormalTok{)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{map_dbl}\NormalTok{(count_obs, }\FloatTok{1.25}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{map_lgl}\NormalTok{(}\ControlFlowTok{function}\NormalTok{(x) x }\OperatorTok{>}\StringTok{ }\DecValTok{2}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mean}\NormalTok{() }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{print}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.9508
+\end{verbatim}
+
+\hypertarget{pregunta-9}{%
+\subsection{Pregunta 9}\label{pregunta-9}}
+
+Simular un proceso Poisson no homogéneo con función de intensidad dada
+por \(\lambda(t) = sen(t)\).
+
+La siguiente función genera el proceso:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{non_homogeneous_poisson_process <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(t)\{}
+  \CommentTok{# lambda = 1 acota la función de intensidad del proceso}
+\NormalTok{  lambda <-}\StringTok{ }\DecValTok{1}
+
+\NormalTok{  s =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\KeywordTok{rexp}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{))}
+  \ControlFlowTok{while}\NormalTok{(}\KeywordTok{tail}\NormalTok{(s,}\DecValTok{1}\NormalTok{) }\OperatorTok{<}\StringTok{ }\NormalTok{t)\{}
+\NormalTok{    s =}\StringTok{ }\KeywordTok{c}\NormalTok{(s, }\KeywordTok{tail}\NormalTok{(s,}\DecValTok{1}\NormalTok{)}\OperatorTok{+}\KeywordTok{rexp}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{))}
+\NormalTok{  \}}
+\NormalTok{  s =}\StringTok{ }\NormalTok{s[}\OperatorTok{-}\KeywordTok{length}\NormalTok{(s)]}
+  
+\NormalTok{  u <-}\StringTok{ }\KeywordTok{runif}\NormalTok{(}\KeywordTok{length}\NormalTok{(s))}
+\NormalTok{  ss <-}\StringTok{ }\NormalTok{s[u }\OperatorTok{<=}\StringTok{ }\KeywordTok{abs}\NormalTok{(}\KeywordTok{sin}\NormalTok{(s)}\OperatorTok{/}\NormalTok{lambda)]}
+\NormalTok{  Ns <-}\StringTok{ }\DecValTok{1}\OperatorTok{:}\KeywordTok{length}\NormalTok{(ss)}
+  
+  \KeywordTok{return}\NormalTok{(}\KeywordTok{list}\NormalTok{(}\DataTypeTok{intentados=}\NormalTok{s, }\DataTypeTok{aceptados =}\NormalTok{ ss, }\DataTypeTok{cuenta=}\NormalTok{ Ns))}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Simulando el proceso.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ans =}\StringTok{ }\KeywordTok{non_homogeneous_poisson_process}\NormalTok{(}\DecValTok{50}\NormalTok{)}
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{), }\DataTypeTok{pty=}\StringTok{'s'}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(ans}\OperatorTok{$}\NormalTok{aceptados, ans}\OperatorTok{$}\NormalTok{cuenta, }\DataTypeTok{type =} \StringTok{"s"}\NormalTok{, }\DataTypeTok{ylab =} \StringTok{"N(t)"}\NormalTok{,}\DataTypeTok{xlab=}\StringTok{'t'}\NormalTok{,}
+     \DataTypeTok{main =} \StringTok{"Proceso Poisson no homogéneo"}\NormalTok{,}
+     \DataTypeTok{sub =} \KeywordTok{expression}\NormalTok{(}\KeywordTok{lambda}\NormalTok{(t) }\OperatorTok{==}\StringTok{ }\KeywordTok{exp}\NormalTok{(}\KeywordTok{paste}\NormalTok{(}\StringTok{"sen"}\NormalTok{,}\StringTok{"(t)"}\NormalTok{)))) }
+
+\KeywordTok{plot}\NormalTok{(ans}\OperatorTok{$}\NormalTok{intentados, }\KeywordTok{sin}\NormalTok{(ans}\OperatorTok{$}\NormalTok{intentados),}\DataTypeTok{col =} \StringTok{"red"}\NormalTok{, }\DataTypeTok{lwd =} \DecValTok{1}\NormalTok{ )}
+\KeywordTok{points}\NormalTok{(ans}\OperatorTok{$}\NormalTok{aceptados, }\KeywordTok{sin}\NormalTok{(ans}\OperatorTok{$}\NormalTok{aceptados),}\DataTypeTok{col =} \StringTok{"blue"}\NormalTok{, }\DataTypeTok{lwd =} \DecValTok{1}\NormalTok{)}
+\KeywordTok{curve}\NormalTok{(}\KeywordTok{sin}\NormalTok{(x), }\DataTypeTok{from=}\DecValTok{0}\NormalTok{, }\DataTypeTok{to=}\DecValTok{100}\NormalTok{, }\DataTypeTok{add=}\NormalTok{T)}
+\KeywordTok{abline}\NormalTok{(}\DataTypeTok{h=}\OperatorTok{-}\NormalTok{.}\DecValTok{5}\NormalTok{)}
+\KeywordTok{abline}\NormalTok{(}\DataTypeTok{h=}\NormalTok{.}\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{sim-t3-sol_files/figure-latex/unnamed-chunk-30-1.pdf}
+La gráfica de la izquierda es el proceso simulado, la gráfica de la
+derecha es la gráfica de sen(t), los puntos sobre la curva son aquellos
+puntos de la forma \((t,sen(t))\), los puntos rojos fueron rechazados,
+en caso contrario fueron aceptados en el proceso.
+
+\hypertarget{pregunta-10}{%
+\subsection{Pregunta 10}\label{pregunta-10}}
+
+Una compañía de seguros tiene 1000 asegurados, cada uno de los cuales
+presentará de manera independiente una reclamación en el siguiente mes
+con probabilidad \(p=0.09245\). Suponiendo que las cantidades de los
+reclamos hechos son variables aleatorias
+\(\mathcal{N}(7000, 25000000)\), estime la probabilidad de que la suma
+de los reclamos exceda \$500,000.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{simular_mes <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(}\DataTypeTok{n_clientes=}\DecValTok{1000}\NormalTok{, }\DataTypeTok{p=}\FloatTok{0.09245}\NormalTok{, }\DataTypeTok{mu=}\DecValTok{7000}\NormalTok{, }\DataTypeTok{sigma=}\DecValTok{5000}\NormalTok{)\{}
+\NormalTok{  reclamacion <-}\StringTok{ }\KeywordTok{rbernoulli}\NormalTok{(n_clientes, p)}
+\NormalTok{  monto <-}\StringTok{ }\KeywordTok{rnorm}\NormalTok{(n_clientes, mu, sigma) }\OperatorTok{*}\StringTok{ }\NormalTok{reclamacion}
+  \KeywordTok{sum}\NormalTok{(monto)}
+\NormalTok{\}}
+
+\KeywordTok{replicate}\NormalTok{(}\DecValTok{10000}\NormalTok{, }\KeywordTok{simular_mes}\NormalTok{()) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{map_lgl}\NormalTok{(}\ControlFlowTok{function}\NormalTok{(x) x}\OperatorTok{>}\DecValTok{500000}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mean}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.9741
+\end{verbatim}
+
+\hypertarget{pregunta-11}{%
+\subsection{Pregunta 11}\label{pregunta-11}}
+
+Escribir una función para generar una mezcla de una distribución normal
+multivariada con dos componentes con medias \(\mu_1\) y \(\mu_2\) y
+matrices de covarianzas \(S_1\) y \(S_2\) respectivamente.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mixed_normal <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(n, mu_}\DecValTok{1}\NormalTok{, mu_}\DecValTok{2}\NormalTok{, S1, S2,p)\{}
+  
+\NormalTok{  m <-}\StringTok{ }\KeywordTok{matrix}\NormalTok{(}\KeywordTok{rnorm}\NormalTok{(n),}\DataTypeTok{nrow =} \KeywordTok{length}\NormalTok{(mu_}\DecValTok{1}\NormalTok{),}\DataTypeTok{ncol =}\NormalTok{n)}
+\NormalTok{  mixed_normals <-}\StringTok{ }\KeywordTok{matrix}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DataTypeTok{nrow=}\KeywordTok{length}\NormalTok{(mu_}\DecValTok{1}\NormalTok{), }\DataTypeTok{ncol =}\NormalTok{ n)}
+  
+\NormalTok{  B1 <-}\StringTok{ }\KeywordTok{chol}\NormalTok{(S1)}
+\NormalTok{  B2 <-}\StringTok{ }\KeywordTok{chol}\NormalTok{(S2)}
+  
+  \ControlFlowTok{for}\NormalTok{( i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\NormalTok{n)\{}
+    \ControlFlowTok{if}\NormalTok{ (}\KeywordTok{runif}\NormalTok{(}\DecValTok{1}\NormalTok{) }\OperatorTok{<}\StringTok{ }\NormalTok{p)\{}
+\NormalTok{      mixed_normals[,i] <-}\StringTok{ }\NormalTok{mu_}\DecValTok{1} \OperatorTok{+}\StringTok{ }\NormalTok{B1}\OperatorTok{%*%}\NormalTok{m[,i]}
+\NormalTok{    \}}
+    \ControlFlowTok{else}\NormalTok{\{}
+\NormalTok{      mixed_normals[,i] <-mu_}\DecValTok{2} \OperatorTok{+}\StringTok{ }\NormalTok{B2}\OperatorTok{%*%}\NormalTok{m[,i]}
+\NormalTok{    \}}
+\NormalTok{  \}}
+  
+  \KeywordTok{return}\NormalTok{ (mixed_normals)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Con el programa, generar una muestra de tamaño \(n = 1000\)
+observaciones de una mezcla 50\% de una normal 4 dimensional con
+\(\mu_1 =(0,0,0,0)\) y \(\mu_2 = (2, 3, 4, 5)\), y matrices de
+covarianzas \(S_1 = S_2 = I_4\).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{normal_multivariate <-}\StringTok{ }\KeywordTok{mixed_normal}\NormalTok{(}\DecValTok{10000}\NormalTok{,}\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{),}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{),}\KeywordTok{diag}\NormalTok{(}\DecValTok{4}\NormalTok{),}\KeywordTok{diag}\NormalTok{(}\DecValTok{4}\NormalTok{),.}\DecValTok{5}\NormalTok{ )}
+\end{Highlighting}
+\end{Shaded}
+
+Obtener los histogramas de las 4 distribuciones marginales.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow=}\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{))}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\DecValTok{4}\NormalTok{)\{}
+  \KeywordTok{hist}\NormalTok{(normal_multivariate[i,],}\DataTypeTok{breaks=}\DecValTok{50}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{sim-t3-sol_files/figure-latex/unnamed-chunk-34-1.pdf}
+
+\hypertarget{pregunta-12-distribucion-de-wishart}{%
+\subsubsection{Pregunta 12: Distribución de
+Wishart}\label{pregunta-12-distribucion-de-wishart}}
+
+Suponga que \(M=X'X\), donde \(X\) es una matriz de \(n \times d\) de
+una muestra aleatoria de una distribución
+\(\mathcal{N}_d(\mathbf{0}, \Sigma)\). Entonces
+\(M \sim W_d(\Sigma, n)\). Notemos que en particular
+\(W_1(\sigma ^2, n) \sim \sigma ^2 \chi^2_{(n)}\).
+
+Una forma de generar observaciones de una distribución Wishart es
+generar muestras de normales con la definición de arriba, pero notamos
+que el método es muy cososo. Uno más eficiente se basa en la
+descomposición ed Bartlett: sea \(T=(t_{ij})\) una matriz triangular
+inferior de \(d \times d\) con entradas independientes que satisfacen
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\tightlist
+\item
+  \(t_{ij} \sim \mathcal{N}(0,1)\) independientes para \(i>j\)
+\item
+  \(t_{ii} \sim \sqrt{\chi^2_{(n-i+1)}}\) para \(i\in \{1, \cdots d\}\)
+\end{enumerate}
+
+Entonces, la matriz \(A=T'T\) es Wishart \(W_d(\mathbb{I}_n, d)\). Para
+terminar, si \(\Sigma = LL'\) es la descomposición de Cholesky de
+\(\Sigma\), entonces \(LAL' \sim W_d(\Sigma, d)\).
+
+Compare el tiempo de ejecución de ambos métodos.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sg <-}\StringTok{ }\KeywordTok{matrix}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\OperatorTok{-}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{,}\OperatorTok{-}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\OperatorTok{-}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{,}\OperatorTok{-}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{), }\DataTypeTok{nrow=}\DecValTok{3}\NormalTok{)}
+
+\NormalTok{rwishart_norm <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(}\DataTypeTok{df=}\DecValTok{1000}\NormalTok{, Sigma)\{}
+\NormalTok{  X <-}\StringTok{ }\KeywordTok{mvrnorm}\NormalTok{(df, }\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{, }\KeywordTok{dim}\NormalTok{(Sigma)[}\DecValTok{1}\NormalTok{]), Sigma)}
+\NormalTok{  M <-}\StringTok{ }\KeywordTok{t}\NormalTok{(X) }\OperatorTok{%*%}\StringTok{ }\NormalTok{X}
+\NormalTok{\}}
+
+\NormalTok{rwishart_norm_n <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(n, }\DataTypeTok{df=}\DecValTok{1000}\NormalTok{, Sigma)\{}
+  \KeywordTok{replicate}\NormalTok{(n, }\KeywordTok{rwishart_norm}\NormalTok{(df, Sigma), }\DataTypeTok{simplify =}\NormalTok{ F)}
+\NormalTok{\}}
+
+\KeywordTok{tic}\NormalTok{(}\StringTok{'Método por normales'}\NormalTok{)}
+\NormalTok{muestra_normal <-}\StringTok{ }\KeywordTok{rwishart_norm_n}\NormalTok{(}\DecValTok{1000}\NormalTok{,}\DecValTok{1000}\NormalTok{,sg)}
+\KeywordTok{toc}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Método por normales: 0.451 sec elapsed
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rwishart_choleksy <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(}\DataTypeTok{df=}\DecValTok{1000}\NormalTok{, d)\{}
+  
+\NormalTok{  tr_part <-}\StringTok{ }\DecValTok{0}\OperatorTok{:}\NormalTok{(d}\DecValTok{-1}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{map}\NormalTok{(}\ControlFlowTok{function}\NormalTok{(i) }\KeywordTok{c}\NormalTok{(}\KeywordTok{rnorm}\NormalTok{(i), }\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{, d}\OperatorTok{-}\NormalTok{i))) }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{unlist}\NormalTok{() }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{matrix}\NormalTok{(}\DataTypeTok{nrow=}\DecValTok{3}\NormalTok{, }\DataTypeTok{ncol=}\DecValTok{3}\NormalTok{, }\DataTypeTok{byrow=}\OtherTok{TRUE}\NormalTok{)}
+  
+\NormalTok{  diag_part <-}\StringTok{ }\DecValTok{1}\OperatorTok{:}\NormalTok{d }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{map}\NormalTok{(}\ControlFlowTok{function}\NormalTok{(i) }\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{rchisq}\NormalTok{(}\DecValTok{1}\NormalTok{, df}\OperatorTok{-}\NormalTok{i}\OperatorTok{+}\DecValTok{1}\NormalTok{))) }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{unlist}\NormalTok{()}
+\NormalTok{  diag_part <-}\StringTok{ }\NormalTok{diag_part }\OperatorTok{*}\StringTok{ }\KeywordTok{diag}\NormalTok{(d)}
+  
+\NormalTok{  A <-}\StringTok{ }\NormalTok{(tr_part}\OperatorTok{+}\NormalTok{diag_part) }\OperatorTok{%*%}\StringTok{ }\KeywordTok{t}\NormalTok{(tr_part}\OperatorTok{+}\NormalTok{diag_part)}
+  
+  
+\NormalTok{\}}
+
+\NormalTok{rwishart_cholesky_n <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(n, }\DataTypeTok{df=}\DecValTok{1000}\NormalTok{, Sigma)\{}
+\NormalTok{  d <-}\StringTok{ }\KeywordTok{dim}\NormalTok{(Sigma)[}\DecValTok{1}\NormalTok{]}
+\NormalTok{  L <-}\StringTok{ }\KeywordTok{t}\NormalTok{(}\KeywordTok{chol}\NormalTok{(Sigma))}
+  \KeywordTok{replicate}\NormalTok{(n, }\KeywordTok{rwishart_choleksy}\NormalTok{(df, d), }\DataTypeTok{simplify=}\OtherTok{FALSE}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{map}\NormalTok{(}\ControlFlowTok{function}\NormalTok{(A) L }\OperatorTok{%*%}\StringTok{ }\NormalTok{A }\OperatorTok{%*%}\StringTok{ }\KeywordTok{t}\NormalTok{(L))}
+\NormalTok{\}}
+
+\KeywordTok{tic}\NormalTok{(}\StringTok{'Método de Bartlett'}\NormalTok{)}
+\NormalTok{muestra_cholesky <-}\StringTok{ }\KeywordTok{rwishart_cholesky_n}\NormalTok{(}\DataTypeTok{n=}\DecValTok{1000}\NormalTok{,}\DataTypeTok{Sigma=}\NormalTok{sg)}
+\KeywordTok{toc}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Método de Bartlett: 0.518 sec elapsed
+\end{verbatim}
+
+En mi implementación es más rápido el método por normales, cosa que le
+atribuyo a la vectorización que microoptimiza la ejecución en
+\texttt{R}.
+
+\hypertarget{pregunta-13}{%
+\subsubsection{Pregunta 13}\label{pregunta-13}}
+
+Las ocurrencias de huracanes que tocan tierra durante el fenómeno
+meteorológico ``el Niño'' se modelan como un proceso Poisson (ver Bove
+et al (1998)). Los autores aseguran que ``Durante un año de 'El Niño',
+la probabilidad de dos o más huracanes haciendo contacto con tierra en
+los estados Unidos es 28 \%''. Encontrar la tasa del proceso Poisson.
+
+Si \(X \sim Po(\lambda)\), entonces
+\(f(x;\lambda) = \frac{e^{-\lambda}\lambda^x}{x!}\).
+
+Dado que \(P(X \geq 2) = .72\) tenemos que \(P(X \leq 1) = .28\) pero
+\(P(X \leq 1) = e^{-\lambda} +e^{-\lambda}\lambda = .72\) y resolviendo
+para \(\lambda\) obtenemos: \(\lambda = 1.043\)
+
+De forma que la tasa del proceso buscado es \(\lambda = 1.043\)
+
+\hypertarget{pregunta-14}{%
+\subsection{Pregunta 14}\label{pregunta-14}}
+
+Comenzando a medio día, comensales llegan a un restaurante de acuerdo a
+un proceso poisson con tasa de 5 clientes por minuto. El tiempo que cada
+cliente pasa comiendo es exponencial con media 40, y todos son
+independientes entre sí y de los tiempos de arribo. Encuentre la
+distribución, media y varianza del número de comensales en el
+restaurante a las 2:00pm. Simule el restaurante para verificar.
+
+Como los tiempos de consumo son exponenciales, el número de clientes que
+sale del restaurante también es un proceso Poisson, independiente del de
+llegada. Luego,
+
+\[
+N(t) = N_L(t)-N_S(t) \sim \mathrm{Poisson}(t(5-\frac{1}{40}))
+\]
+
+Por lo que \(N(120) \sim \mathrm{Poisson}(597)\) que tiene media y
+varianza 597. Simulando para comparar
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{obtener_muestra <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{()\{}
+\NormalTok{  llegadas <-}\StringTok{ }\KeywordTok{poisson_nh}\NormalTok{(}\ControlFlowTok{function}\NormalTok{(t) }\DecValTok{5}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DataTypeTok{Tmax=}\DecValTok{120}\NormalTok{)}
+\NormalTok{  salidas <-}\StringTok{ }\KeywordTok{poisson_nh}\NormalTok{(}\ControlFlowTok{function}\NormalTok{(t) }\DecValTok{1}\OperatorTok{/}\DecValTok{40}\NormalTok{, }\DecValTok{1}\OperatorTok{/}\DecValTok{40}\NormalTok{, }\DataTypeTok{N=}\KeywordTok{length}\NormalTok{(llegadas), }\DataTypeTok{by_time =}\NormalTok{ F) }\OperatorTok{+}\StringTok{ }\NormalTok{llegadas[}\DecValTok{1}\NormalTok{]}
+  \ControlFlowTok{if}\NormalTok{(}\KeywordTok{length}\NormalTok{(}\KeywordTok{which}\NormalTok{(salidas}\OperatorTok{<}\DecValTok{120}\NormalTok{))}\OperatorTok{==}\DecValTok{0}\NormalTok{)}
+    \KeywordTok{length}\NormalTok{(llegadas)}
+  \ControlFlowTok{else}
+    \KeywordTok{length}\NormalTok{(llegadas) }\OperatorTok{-}\StringTok{ }\KeywordTok{max}\NormalTok{(}\KeywordTok{which}\NormalTok{(salidas}\OperatorTok{<}\DecValTok{120}\NormalTok{))}
+\NormalTok{\}}
+
+\NormalTok{muestra_restaurante <-}\StringTok{ }\KeywordTok{replicate}\NormalTok{(}\DecValTok{1000}\NormalTok{, }\KeywordTok{obtener_muestra}\NormalTok{())}
+
+\KeywordTok{data_frame}\NormalTok{(}\DataTypeTok{sim=}\NormalTok{muestra_restaurante) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{sample=}\NormalTok{sim)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_qq_band}\NormalTok{(}\DataTypeTok{alpha=}\FloatTok{0.5}\NormalTok{, }\DataTypeTok{distribution=}\StringTok{'pois'}\NormalTok{, }\DataTypeTok{dparams=}\DecValTok{597}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{stat_qq_line}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{stat_qq_point}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{"Theoretical quantiles"}\NormalTok{, }\DataTypeTok{y =} \StringTok{"simulated values"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{sim-t3-sol_files/figure-latex/unnamed-chunk-36-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{probs <-}\StringTok{ }\KeywordTok{data_frame}\NormalTok{(muestra_restaurante) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(muestra_restaurante) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{count}\NormalTok{() }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{right_join}\NormalTok{(}\KeywordTok{data_frame}\NormalTok{(}\DataTypeTok{muestra_restaurante=}\DecValTok{1}\OperatorTok{:}\KeywordTok{max}\NormalTok{(muestra_restaurante))) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{probs =} \KeywordTok{ifelse}\NormalTok{(}\KeywordTok{is.na}\NormalTok{(n), }\DecValTok{0}\NormalTok{, n)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{pull}\NormalTok{(probs)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Joining, by = "muestra_restaurante"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{muestra_unique <-}\StringTok{ }\KeywordTok{table}\NormalTok{(muestra_restaurante) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{names}\NormalTok{() }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{as.integer}\NormalTok{() }
+
+\NormalTok{p <-}\StringTok{ }\KeywordTok{dpois}\NormalTok{(muestra_unique, }\DataTypeTok{lambda=}\DecValTok{597}\NormalTok{)}
+\NormalTok{p <-}\StringTok{ }\NormalTok{p}\OperatorTok{/}\KeywordTok{sum}\NormalTok{(p)}
+
+\KeywordTok{chisq.test}\NormalTok{(}\KeywordTok{table}\NormalTok{(muestra_restaurante), }\DataTypeTok{p=}\NormalTok{p)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in chisq.test(table(muestra_restaurante), p = p): Chi-squared
+## approximation may be incorrect
+\end{verbatim}
+
+\begin{verbatim}
+## 
+##  Chi-squared test for given probabilities
+## 
+## data:  table(muestra_restaurante)
+## X-squared = 158.69, df = 125, p-value = 0.02242
+\end{verbatim}
+
+\hypertarget{pregunta-15}{%
+\subsubsection{Pregunta 15}\label{pregunta-15}}
+
+Construyan un vector de 100 números crecientes y espaciados regularmente
+entre 0.1 y 20. Llámenlo SIG2 . Ahora construyan otro vector de longitud
+21 empezando en −1 y terminando en 1. Llámenlo RHO.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sig2 =}\StringTok{ }\KeywordTok{seq}\NormalTok{(}\DataTypeTok{from=}\NormalTok{.}\DecValTok{1}\NormalTok{,}\DataTypeTok{to=}\DecValTok{20}\NormalTok{,}\DataTypeTok{length.out=}\DecValTok{100}\NormalTok{)}
+\NormalTok{rho =}\StringTok{ }\KeywordTok{seq}\NormalTok{(}\DataTypeTok{from=}\OperatorTok{-}\DecValTok{1}\NormalTok{,}\DataTypeTok{to=}\DecValTok{1}\NormalTok{,}\DataTypeTok{length.out=}\DecValTok{21}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Para cada entrada σ2 de SIG2 y cada entrada de RHO:
+
+\begin{itemize}
+\tightlist
+\item
+  Generar una muestra de tamaño N = 500 de una distribución bivariada
+  normal \(Z =(X,Y)\) donde \(X \sim N(0,1)\) y \(Y \sim N(0,\sigma^2)\)
+  y el coeficientede correlación de X y Y es \(\rho\). Z es una matriz
+  de dimensiones 500 × 2.
+\item
+  Crear una matriz de 500 × 2, llámenlo EXPZ, con las exponenciales de
+  las entradas de Z. ¿Qué distribución tienen estas variables
+  transformadas?
+\item
+  Calculen el coeficiente de correlación, \hat{p} de las columnas de
+  EXPZ. Grafiquen los puntos \((\sigma^2, \hat{ρ})\) y comenten sobre lo
+  que obtuvieron.
+\end{itemize}
+
+La siguiente función permite generar una muestra aleatoria de tamaño n
+de una variable aleatoria normal multivariada con vector de medias
+\(\mu\) y matriz de covarianzas \(\Sigma\):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rnorm_multivariate <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(n,mu,Sigma)\{}
+\NormalTok{  m <-}\StringTok{ }\KeywordTok{length}\NormalTok{(mu)}
+  
+\NormalTok{  eig <-}\StringTok{ }\KeywordTok{eigen}\NormalTok{(Sigma)}
+\NormalTok{  lambda <-}\StringTok{ }\NormalTok{eig}\OperatorTok{$}\NormalTok{values; }
+\NormalTok{  V <-}\StringTok{ }\NormalTok{eig}\OperatorTok{$}\NormalTok{vectors}
+  
+\NormalTok{  Q <-}\StringTok{ }\NormalTok{V }\OperatorTok{%*%}\StringTok{ }\KeywordTok{diag}\NormalTok{(}\KeywordTok{sqrt}\NormalTok{(lambda)) }\OperatorTok{%*%}\StringTok{ }\KeywordTok{t}\NormalTok{(V)}
+  
+\NormalTok{  Z <-}\StringTok{ }\KeywordTok{matrix}\NormalTok{(}\KeywordTok{rnorm}\NormalTok{(n}\OperatorTok{*}\NormalTok{m),}\DataTypeTok{nrow=}\NormalTok{n, }\DataTypeTok{ncol=}\NormalTok{m)}
+\NormalTok{  X <-}\StringTok{ }\NormalTok{Z }\OperatorTok{%*%}\StringTok{ }\NormalTok{Q }\OperatorTok{+}\StringTok{ }\KeywordTok{matrix}\NormalTok{(mu,n,m,}\DataTypeTok{byrow=}\NormalTok{T)}
+  
+  \KeywordTok{return}\NormalTok{ (X)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Haciendo la simulación
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{normales=}\KeywordTok{list}\NormalTok{(}\OtherTok{NULL}\NormalTok{)}
+\NormalTok{EXPZ =}\StringTok{ }\KeywordTok{list}\NormalTok{(}\OtherTok{NULL}\NormalTok{)}
+\NormalTok{i<-}\DecValTok{1}
+\NormalTok{sigmas <-}\StringTok{ }\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{2100}\NormalTok{)}
+\NormalTok{rho_gorros <-}\StringTok{ }\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{2100}\NormalTok{)}
+\NormalTok{rhos <-}\StringTok{ }\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{2100}\NormalTok{)}
+
+\ControlFlowTok{for}\NormalTok{ (r }\ControlFlowTok{in}\NormalTok{ rho)\{}
+  \ControlFlowTok{for}\NormalTok{ (s }\ControlFlowTok{in}\NormalTok{ sig2)\{}
+    
+\NormalTok{    Sigma =}\StringTok{ }\KeywordTok{matrix}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\KeywordTok{sqrt}\NormalTok{(s)}\OperatorTok{*}\NormalTok{r,}\KeywordTok{sqrt}\NormalTok{(s)}\OperatorTok{*}\NormalTok{r,s),}\DataTypeTok{ncol=}\DecValTok{2}\NormalTok{)}
+\NormalTok{    normales[[i]] <-}\StringTok{ }\KeywordTok{rnorm_multivariate}\NormalTok{(}\DecValTok{5000}\NormalTok{, }\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{), Sigma)}
+\NormalTok{    EXPZ[[i]] <-}\StringTok{ }\KeywordTok{exp}\NormalTok{(normales[[i]])}
+    
+\NormalTok{    sigmas[i] <-}\StringTok{ }\NormalTok{s}
+\NormalTok{    rho_gorros[i] <-}\StringTok{ }\KeywordTok{cor}\NormalTok{(EXPZ[[i]])[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{]}
+\NormalTok{    rhos[i] <-}\StringTok{ }\NormalTok{r}
+    
+\NormalTok{    i =}\StringTok{ }\NormalTok{i}\OperatorTok{+}\DecValTok{1}
+\NormalTok{  \}}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+EXPZ se obtiene tras aplicar la función exponencial a una variable
+aleatoria distribuida normal de forma que EXPZ se distribuye lognormal.
+
+Graficando:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{))}
+\KeywordTok{plot}\NormalTok{(sigmas,rhos)}
+\KeywordTok{plot}\NormalTok{(sigmas,rho_gorros)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{sim-t3-sol_files/figure-latex/unnamed-chunk-40-1.pdf}
+
+La gráfica del lado izquierda está formada por los puntos
+\((\sigma^2, \rho)\) que fueron utilizados para generar las normales, la
+gráfica del lado derecho está formada por puntos de la forma
+\((\sigma^2, \hat{\rho})\) donde \(\hat{\rho}\) es la correlación entre
+dos variables lognormales obtenidas a partir de las siguientes normales
+\(N(0,1)\) y \(N(0,\sigma^2)\).
+
+Notamos que la correlación cambió sustancialmente.
+
+
+\end{document}
